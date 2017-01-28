@@ -22,7 +22,7 @@ pod "MRefresh"
 
 ## Author
 
-Mikhail Rakhmanov, m.rakhmanov@rambler-co.ru
+Mikhail Rakhmanov, rakhmanov.m@gmail.com
 
 ## License
 

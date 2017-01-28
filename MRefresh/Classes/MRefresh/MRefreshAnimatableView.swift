@@ -18,6 +18,9 @@ enum MRefreshAnimatableViewConstants {
     }
 }
 
+public typealias ProcessingAnimationClosure = (CALayer) -> ()
+public typealias EndAnimationClosure = (CALayer, @escaping () -> ()) -> ()
+
 open class MRefreshAnimatableView: UIView, MRefreshAnimatableViewConforming {
 	
 	fileprivate let animationsFactory = MRefreshAnimationsFactory()
@@ -32,6 +35,9 @@ open class MRefreshAnimatableView: UIView, MRefreshAnimatableViewConforming {
     fileprivate var pathLayer: CAShapeLayer?
     fileprivate var pathManager: SVGPathManager
     
+    public var processingAnimationClosure: ProcessingAnimationClosure?
+    public var endAnimationClosure: EndAnimationClosure?
+    
     public init(frame: CGRect, pathManager: SVGPathManager) {
 		rotationAnimation = animationsFactory.rotationAnimation()
 		shrinkAnimation = animationsFactory.shrinkAnimation()
@@ -39,8 +45,10 @@ open class MRefreshAnimatableView: UIView, MRefreshAnimatableViewConforming {
         blinkAnimation = animationsFactory.blinkAnimation()
 		
         self.pathManager = pathManager
+        super.init(frame: frame)
         
-		super.init(frame: frame)
+        processingAnimationClosure = defaultProcessingAnimationClosure()
+        endAnimationClosure = defaultEndAnimationClosure()
         
 		backgroundColor = UIColor.clear
 	}
@@ -65,34 +73,47 @@ open class MRefreshAnimatableView: UIView, MRefreshAnimatableViewConforming {
 	}
 	
 	open func stopAnimation() {
-		addShrinkAnimation()
-		addFadeAnimation()
-		removeAllAnimationsUponCompletion()
+		endAnimationClosure?(layer, removeAllAnimations)
 	}
 	
 	open func startAnimation() {
-		 restartAnimation()
+        restartAnimation()
 	}
 	
 	private func restartAnimation() {
 		layer.removeAllAnimations()
-        layer.add(blinkAnimation, forKey: constants.KeyPaths.blinkAnimation)
+        processingAnimationClosure?(layer)
     }
 	
-	private func addShrinkAnimation() {
-    	layer.add(shrinkAnimation, forKey: constants.KeyPaths.shrinkAnimation)
+	private func removeAllAnimations() {
+        layer.removeAllAnimations()
+		pathLayer?.removeFromSuperlayer()
     }
-	
-    private func addFadeAnimation() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + shrinkAnimation.duration / 2.0) {
-            self.layer.add(self.fadeAnimation, forKey: self.constants.KeyPaths.fadeAnimation)
+    
+    private func defaultProcessingAnimationClosure() -> ProcessingAnimationClosure {
+        return { [weak self] layer in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.layer.add(strongSelf.blinkAnimation, forKey: strongSelf.constants.KeyPaths.blinkAnimation)
         }
     }
-	
-	private func removeAllAnimationsUponCompletion() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + shrinkAnimation.duration) {
-			self.layer.removeAllAnimations()
-			self.pathLayer?.removeFromSuperlayer()
-		}
-	}
+    
+    private func defaultEndAnimationClosure() -> EndAnimationClosure {
+        return { [weak self] layer, completion in
+            guard let strongSelf = self else {
+                return
+            }
+            
+            layer.add(strongSelf.shrinkAnimation,
+                      forKey: strongSelf.constants.KeyPaths.shrinkAnimation)
+            DispatchQueue.main.asyncAfter(deadline: .now() + strongSelf.shrinkAnimation.duration / 2.0) {
+                strongSelf.layer.add(strongSelf.fadeAnimation,
+                                     forKey: strongSelf.constants.KeyPaths.fadeAnimation)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + strongSelf.shrinkAnimation.duration) {
+                completion()
+            }
+        }
+    }
 }
