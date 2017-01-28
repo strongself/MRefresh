@@ -1,0 +1,22 @@
+{
+  "name": "MRefresh",
+  "version": "0.1.0",
+  "summary": "A short description of MRefresh.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/MRefresh",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Mikhail Rakhmanov": "m.rakhmanov@rambler-co.ru"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/MRefresh.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "MRefresh/Classes/**/*"
+}
