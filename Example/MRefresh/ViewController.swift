@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         let size = CGSize(width: 40.0, height: 40.0)
         let pathManager = defaultPathManager(size: size)
-        let pathConfiguration = PathConfiguration(lineWidth: 2.0,
+        let pathConfiguration = PathConfiguration(lineWidth: 1.0,
                                                   strokeColor: UIColor.black)
         let view = MRefreshAnimatableView(frame: CGRect(origin: CGPoint.zero,
                                                         size: size),

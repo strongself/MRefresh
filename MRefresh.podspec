@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'MRefresh'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'This pod enables you to add pull-to-refresh mechanism to your scrollviews and tableviews and use svg patterns in your refreshing views layers.'
   s.homepage         = 'https://github.com/strongself/MRefresh'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
