@@ -13,7 +13,7 @@ So basically MRefresh is a pull-to-refresh with a clear separation of concerns w
 - a default implementation of the animatable view which calls *SVGPathManager* and asks it to provide the UIBezierPath object which will be drawn inside of animatable view's layer
 
 To sum up, you can:
-- take *most* SVG paths (though as of today arc command have not been implemented) and draw them in any combination when user pulls the scrollview,
+- take *most* SVG paths (though as of today arc command has not been implemented) and draw them in any combination when user pulls the scrollview,
 - provide your own custom animations to the pull-to-refresh view
 
 So here's a quick demo of what this library can do (we are drawing one of the FontAwesome SVG paths):
@@ -28,12 +28,12 @@ Below see the steps needed to configure the pull-to-refresh view. Of course, if 
 
 The library was made in a way that enables you to configure all parameters of the pull-to-refresh process.
 
-Firstly, you need and SVG Path, let it be something like this (it is a path that was taken from one of the FontAwesome icons, no copyrights infringed I hope): 
+Firstly, you need SVG path, let it be something like this (it is a path that was taken from one of the FontAwesome icons, no copyrights infringed I hope): 
 
 ```swift
 let path = "M1247 161q-5 154 -56 297.5t-139.5 260t-205 205t-260 139.5t-297.5 56q-14 1 -23 -9q-10 -10 -10 -23v-128q0 -13 9 -22t22 -10q204 -7 378 -111.5t278.5 -278.5t111.5 -378q1 -13 10 -22t22 -9h128q13 0 23 10q11 9 9 23"
 ```
-Secondly, you need to create a path configuration:
+Secondly, you need to create a svg path configuration, which provides additional parameters about how the path should be scaled:
 
 ```swift
 let configuration = SVGPathConfiguration(path: svg, // path string
@@ -41,7 +41,9 @@ let configuration = SVGPathConfiguration(path: svg, // path string
                                          drawableFrame: frame) // frame to which the svg should be resized
 ```
 
-Thirdly, you should provide timing for the path to be drawn. Such timing should be a value from 0.0 to 1.0, where 0.0 tells that the animatable view should appear on screen. So if you set it to for example 0.95 the path will start to appear when the content offset reaches somewhat near the endValue (i.e. near the stage when the actionHandler is called), so the path will be drawn very fast.
+Thirdly, you should provide timing for the path to be drawn. Such timing should be a value from 0.0 to 1.0, where 0.0 tells us that the path is drawn as soon as possible when content offset of the scroll view reaches some threshold.
+
+Conversely, if you set it to for example 0.95 the path will start to appear when the content offset reaches somewhat near the end value (i.e. near the stage when the actionHandler is called and content inset is changed).
 
 ```swift
 let configurationTime: ConfigurationTime = (time: 0.0,
@@ -53,7 +55,7 @@ To avoid any doubts, you can use many svg's and configurations to configure comp
 let configurationTimes = [firstConfigurationTime, secondConfigurationTime]
 ```
 
-Then it is time to create the *SVGPathManager* which will do all the hard work converting and resizing your SVG's.
+Then it is time to create the *SVGPathManager* which will do all the hard work converting and resizing your svg's.
 
 ```swift
 let pathManager = try! SVGPathManager(configurationTimes: [secondConfigurationTime, firstConfigurationTime],
@@ -79,7 +81,7 @@ So *frame* is obviously the frame in which the view is drawn (actually the origi
 
 #### MRefreshConfiguration
 
-Finally, you need to provide some additional data (*MRefreshConfiguration*) to describe how you want the scroll view to behave.
+Finally, you need to provide some additional data (*MRefreshConfiguration*) to describe how you want the scroll view to behave:
 
 ```swift
 let refreshConfiguration = MRefreshConfiguration(heightIncrease: 40.0,
@@ -94,6 +96,8 @@ let refreshConfiguration = MRefreshConfiguration(heightIncrease: 40.0,
 - *contentInsetChangeAnimationDuration* is basically what the name tells us about, i.e. animation duration of a view changing its inset from starting state to loading state and backwards (to starting state).
 
 #### Adding handler to a scroll view 
+
+The very last thing is to add the animatable view, the configuration and the action handler (i.e. the closure which is called when the content offset reaches certain value) to a scroll view.
 
 ```swift
 tableView.addPullToRefresh(animatable: view, // MRefreshAnimatableView
@@ -126,14 +130,16 @@ In case of *MRefreshAnimatableView* which is a view conforming to  *MRefreshAnim
 
 The content offset of the scrollview has reached the *endValue*. Now:
 - the view receives the *startAnimation* message,
-- the scrollview's inset is increased to fit the animatable view with some additional space,
+- the scrollview's inset is increased to fit the animatable view with some additional space (== frame of the MRefreshView(,
 - the actionHandler closure is called (e.g. some services shall start downloading something etc)
 
 In case of *MRefreshAnimatableView* it calls a *processingAnimationClosure(CALayer)*. This closure has a default implementation, though you can define your own animations on a layer.  
 
 #### Fourth stage
 
-The scrollview receives *stopAnimating* message (you should send the message when e.g. the data/error is received). After that if user is not holding the view with his finger, the view will receive *stopAnimation* message. Again if we're talking about the *MRefreshAnimatableView* it calls the *endAnimationClosure(CALayer, completion: () -> ())*. So you should either use a default implementation or you can provide your own animation on the layer and call completion when it is finished. Please bear in mind the respective timing, because after user releases its finger the scrollview changes its insets to initial value.  
+The scrollview receives *stopAnimating* message (you should send the message when e.g. the data/error is received upon loading). After that if user is not holding the view with his finger, the view will receive *stopAnimation* message. Again if we're talking about the *MRefreshAnimatableView* it calls the *endAnimationClosure(CALayer, completion: () -> ())*. So you should either use a default implementation or you can provide your own animation on the layer and call completion when the animation is finished.
+
+Please bear in mind the respective timing, because after user releases its finger the scrollview changes its insets to initial value.  
 
 ## Installation
 
