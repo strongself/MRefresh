@@ -24,24 +24,24 @@ struct LayerConfiguration {
 }
 
 public class MRefreshSublayersFactory {
-	func circleLayer(radius: CGFloat, proportion: CGFloat, borderColor: UIColor, backgroundColor: UIColor) -> CAShapeLayer {
+    func circleLayer(radius: CGFloat, proportion: CGFloat, borderColor: UIColor, backgroundColor: UIColor) -> CAShapeLayer {
         let constants = SpinnerConstants.Circle.self
-		let layer = CAShapeLayer()
-		let startAngle = constants.arcStartAngle
-		let endAngle = startAngle + 2 * π * proportion * constants.arcProportionDefault
-
-		let bezierPath = UIBezierPath(arcCenter: CGPoint(x: radius, y: radius),
-		                              radius: radius,
-		                              startAngle: startAngle,
-		                              endAngle: endAngle,
-		                              clockwise: true)
-		layer.path = bezierPath.cgPath
-		layer.lineWidth = constants.borderWidthDefault
-		layer.strokeColor = borderColor.cgColor
-		layer.fillColor = backgroundColor.cgColor
-		
-		return layer
-	}
+        let layer = CAShapeLayer()
+        let startAngle = constants.arcStartAngle
+        let endAngle = startAngle + 2 * π * proportion * constants.arcProportionDefault
+        
+        let bezierPath = UIBezierPath(arcCenter: CGPoint(x: radius, y: radius),
+                                      radius: radius,
+                                      startAngle: startAngle,
+                                      endAngle: endAngle,
+                                      clockwise: true)
+        layer.path = bezierPath.cgPath
+        layer.lineWidth = constants.borderWidthDefault
+        layer.strokeColor = borderColor.cgColor
+        layer.fillColor = backgroundColor.cgColor
+        
+        return layer
+    }
     
     func layer(from configuration: LayerConfiguration) -> CAShapeLayer {
         let layer = CAShapeLayer()

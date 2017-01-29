@@ -16,4 +16,22 @@ struct MRefreshViewConfiguration {
     let animationEndDistanceOffset: CGFloat
     let animationStartDistance: CGFloat
     let handler: ActionHandler
+    let contentInsetChangeAnimationDuration: Double
+}
+
+public struct MRefreshConfiguration {
+    let heightIncrease: CGFloat
+    let animationEndDistanceOffset: CGFloat
+    let animationStartDistance: CGFloat
+    let contentInsetChangeAnimationDuration: Double
+    
+    public init(heightIncrease: CGFloat,
+         animationEndDistanceOffset: CGFloat,
+         animationStartDistance: CGFloat,
+         contentInsetChangeAnimationDuration: Double) {
+        self.heightIncrease = heightIncrease
+        self.animationEndDistanceOffset = animationEndDistanceOffset
+        self.animationStartDistance = animationStartDistance
+        self.contentInsetChangeAnimationDuration = contentInsetChangeAnimationDuration
+    }
 }

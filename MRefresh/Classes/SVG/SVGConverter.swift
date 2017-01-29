@@ -43,16 +43,16 @@ class SVGConverter {
         switch currentNode.instruction {
         case .line:
             path.addLine(to: currentNode.points[0])
-        
+            
         case .cubic:
             path.addCurve(to: currentNode.points[2], controlPoint1: currentNode.points[0], controlPoint2: currentNode.points[1])
-       
+            
         case .quadratic:
             path.addQuadCurve(to: currentNode.points[1], controlPoint: currentNode.points[0])
             
         case .horizontal:
             path.addLine(to: currentNode.points[0])
-        
+            
         case .vertical:
             path.addLine(to: currentNode.points[0])
             
@@ -64,7 +64,7 @@ class SVGConverter {
             if let point = stack.pop() {
                 path.move(to: point)
             }
-        
+            
         default:
             break
         }

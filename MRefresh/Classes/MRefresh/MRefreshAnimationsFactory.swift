@@ -24,41 +24,41 @@ enum MRefreshAnimationsFactoryConstants {
 }
 
 public class MRefreshAnimationsFactory {
-	
+    
     let constants = MRefreshAnimationsFactoryConstants.self
     
-	func rotationAnimation() -> CABasicAnimation {
-		let rotationAnimation = CABasicAnimation(keyPath: constants.KeyPaths.rotationAnimation)
-		
-		rotationAnimation.toValue = 2.0 * π
-		rotationAnimation.duration = constants.Durations.rotationAnimation
-		rotationAnimation.repeatCount = HUGE
-		rotationAnimation.isRemovedOnCompletion = false
-		
-		return rotationAnimation
-	}
-	
-	func shrinkAnimation() -> CABasicAnimation {
-		let shrinkAnimation = CABasicAnimation(keyPath: constants.KeyPaths.scaleAnimation)
-		
-		shrinkAnimation.toValue = 0
-		shrinkAnimation.duration = constants.Durations.shrinkAnimation
-		shrinkAnimation.fillMode = kCAFillModeForwards
-		shrinkAnimation.isRemovedOnCompletion = false
-		
-		return shrinkAnimation
-	}
-	
-	func fadeAnimation() -> CABasicAnimation {
-		let fadeAnimation = CABasicAnimation(keyPath: constants.KeyPaths.opacityAnimation)
-		
-		fadeAnimation.toValue = 0
-		fadeAnimation.duration = constants.Durations.fadeAnimation
-		fadeAnimation.fillMode = kCAFillModeForwards
-		fadeAnimation.isRemovedOnCompletion = false
-		
-		return fadeAnimation
-	}
+    func rotationAnimation() -> CABasicAnimation {
+        let rotationAnimation = CABasicAnimation(keyPath: constants.KeyPaths.rotationAnimation)
+        
+        rotationAnimation.toValue = 2.0 * π
+        rotationAnimation.duration = constants.Durations.rotationAnimation
+        rotationAnimation.repeatCount = HUGE
+        rotationAnimation.isRemovedOnCompletion = false
+        
+        return rotationAnimation
+    }
+    
+    func shrinkAnimation() -> CABasicAnimation {
+        let shrinkAnimation = CABasicAnimation(keyPath: constants.KeyPaths.scaleAnimation)
+        
+        shrinkAnimation.toValue = 0
+        shrinkAnimation.duration = constants.Durations.shrinkAnimation
+        shrinkAnimation.fillMode = kCAFillModeForwards
+        shrinkAnimation.isRemovedOnCompletion = false
+        
+        return shrinkAnimation
+    }
+    
+    func fadeAnimation() -> CABasicAnimation {
+        let fadeAnimation = CABasicAnimation(keyPath: constants.KeyPaths.opacityAnimation)
+        
+        fadeAnimation.toValue = 0
+        fadeAnimation.duration = constants.Durations.fadeAnimation
+        fadeAnimation.fillMode = kCAFillModeForwards
+        fadeAnimation.isRemovedOnCompletion = false
+        
+        return fadeAnimation
+    }
     
     func blinkAnimation() -> CABasicAnimation {
         let blinkAnimation = CABasicAnimation(keyPath: constants.KeyPaths.opacityAnimation)

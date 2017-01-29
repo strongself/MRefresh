@@ -65,6 +65,6 @@ class SVGReader {
         
         return nodes
     }
-
+    
 }
 

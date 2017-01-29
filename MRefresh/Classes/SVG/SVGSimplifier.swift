@@ -32,7 +32,7 @@ class SVGSimplifier {
                     offsetNode = previousNode
                 }
             }
-
+            
             if nodes[index].instruction.isRelative {
                 let convertedNode = convertRelativeNode(nodes[index], lastNode: offsetNode)
                 convertedNodes.append(convertedNode)

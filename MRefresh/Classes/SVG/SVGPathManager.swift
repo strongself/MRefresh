@@ -41,7 +41,7 @@ public class SVGPathManager {
                                                          drawableFrame: $0.configuration.drawableFrame,
                                                          offset: firstContainer.offset,
                                                          scale: firstContainer.scale))
-                    }
+            }
             containers += otherContainers
             
             containerTimes = containers

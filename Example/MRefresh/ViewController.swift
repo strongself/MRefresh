@@ -41,7 +41,12 @@ class ViewController: UIViewController, UITableViewDataSource {
                                                         size: size),
                                           pathManager: pathManager)
         
-        tableView.addPullToRefresh(animatable: view) {
+        let viewConfiguration = MRefreshConfiguration(heightIncrease: 40.0,
+                                                      animationEndDistanceOffset: 20.0,
+                                                      animationStartDistance: 20.0,
+                                                      contentInsetChangeAnimationDuration: 0.3)
+        
+        tableView.addPullToRefresh(animatable: view, configuration: viewConfiguration) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5, execute: {
                 self.tableView.stopAnimating()
             })

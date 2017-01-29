@@ -22,16 +22,16 @@ public typealias ProcessingAnimationClosure = (CALayer) -> ()
 public typealias EndAnimationClosure = (CALayer, @escaping () -> ()) -> ()
 
 open class MRefreshAnimatableView: UIView, MRefreshAnimatableViewConforming {
-	
-	fileprivate let animationsFactory = MRefreshAnimationsFactory()
-	fileprivate let sublayersFactory = MRefreshSublayersFactory()
+    
+    fileprivate let animationsFactory = MRefreshAnimationsFactory()
+    fileprivate let sublayersFactory = MRefreshSublayersFactory()
     fileprivate let constants = MRefreshAnimatableViewConstants.self
-	
+    
     fileprivate var rotationAnimation: CABasicAnimation
-	fileprivate var shrinkAnimation: CABasicAnimation
-	fileprivate var fadeAnimation: CABasicAnimation
+    fileprivate var shrinkAnimation: CABasicAnimation
+    fileprivate var fadeAnimation: CABasicAnimation
     fileprivate var blinkAnimation: CABasicAnimation
-	
+    
     fileprivate var pathLayer: CAShapeLayer?
     fileprivate var pathManager: SVGPathManager
     
@@ -39,25 +39,25 @@ open class MRefreshAnimatableView: UIView, MRefreshAnimatableViewConforming {
     public var endAnimationClosure: EndAnimationClosure?
     
     public init(frame: CGRect, pathManager: SVGPathManager) {
-		rotationAnimation = animationsFactory.rotationAnimation()
-		shrinkAnimation = animationsFactory.shrinkAnimation()
-		fadeAnimation = animationsFactory.fadeAnimation()
+        rotationAnimation = animationsFactory.rotationAnimation()
+        shrinkAnimation = animationsFactory.shrinkAnimation()
+        fadeAnimation = animationsFactory.fadeAnimation()
         blinkAnimation = animationsFactory.blinkAnimation()
-		
+        
         self.pathManager = pathManager
         super.init(frame: frame)
         
         processingAnimationClosure = defaultProcessingAnimationClosure()
         endAnimationClosure = defaultEndAnimationClosure()
         
-		backgroundColor = UIColor.clear
-	}
-	
-	required public init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-	
-	open func drawIndicatorView(proportion: CGFloat) {
+        backgroundColor = UIColor.clear
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    open func drawIndicatorView(proportion: CGFloat) {
         guard let path = try? pathManager.toPath(proportion: proportion) else { return }
         
         pathLayer?.removeFromSuperlayer()
@@ -66,28 +66,28 @@ open class MRefreshAnimatableView: UIView, MRefreshAnimatableViewConforming {
                                                lineWidth: 1.0,
                                                fillColor: UIColor.clear.cgColor,
                                                strokeColor: UIColor.black.cgColor)
-		let newPathLayer = sublayersFactory.layer(from: configuration)
+        let newPathLayer = sublayersFactory.layer(from: configuration)
         layer.addSublayer(newPathLayer)
         
         pathLayer = newPathLayer
-	}
-	
-	open func stopAnimation() {
-		endAnimationClosure?(layer, removeAllAnimations)
-	}
-	
-	open func startAnimation() {
+    }
+    
+    open func stopAnimation() {
+        endAnimationClosure?(layer, removeAllAnimations)
+    }
+    
+    open func startAnimation() {
         restartAnimation()
-	}
-	
-	private func restartAnimation() {
-		layer.removeAllAnimations()
+    }
+    
+    private func restartAnimation() {
+        layer.removeAllAnimations()
         processingAnimationClosure?(layer)
     }
-	
-	private func removeAllAnimations() {
+    
+    private func removeAllAnimations() {
         layer.removeAllAnimations()
-		pathLayer?.removeFromSuperlayer()
+        pathLayer?.removeFromSuperlayer()
     }
     
     private func defaultProcessingAnimationClosure() -> ProcessingAnimationClosure {

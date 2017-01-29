@@ -46,7 +46,7 @@ class SVGPathContainer {
     
     func toPath(proportion: CGFloat? = nil) throws -> UIBezierPath {
         let amount = Int(CGFloat(currentNodes.count) * (proportion ?? 1.0))
-      
+        
         if amount < 2 {
             return UIBezierPath()
         }
