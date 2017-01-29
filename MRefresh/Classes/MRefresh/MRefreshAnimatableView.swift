@@ -26,6 +26,8 @@ open class MRefreshAnimatableView: UIView, MRefreshAnimatableViewConforming {
     fileprivate let animationsFactory = MRefreshAnimationsFactory()
     fileprivate let sublayersFactory = MRefreshSublayersFactory()
     fileprivate let constants = MRefreshAnimatableViewConstants.self
+    fileprivate let lineWidth: CGFloat
+    fileprivate let strokeColor: UIColor
     
     fileprivate var rotationAnimation: CABasicAnimation
     fileprivate var shrinkAnimation: CABasicAnimation
@@ -38,13 +40,16 @@ open class MRefreshAnimatableView: UIView, MRefreshAnimatableViewConforming {
     public var processingAnimationClosure: ProcessingAnimationClosure?
     public var endAnimationClosure: EndAnimationClosure?
     
-    public init(frame: CGRect, pathManager: SVGPathManager) {
+    public init(frame: CGRect, pathManager: SVGPathManager, pathConfiguration: PathConfiguration) {
         rotationAnimation = animationsFactory.rotationAnimation()
         shrinkAnimation = animationsFactory.shrinkAnimation()
         fadeAnimation = animationsFactory.fadeAnimation()
         blinkAnimation = animationsFactory.blinkAnimation()
         
         self.pathManager = pathManager
+        self.lineWidth = pathConfiguration.lineWidth
+        self.strokeColor = pathConfiguration.strokeColor
+        
         super.init(frame: frame)
         
         processingAnimationClosure = defaultProcessingAnimationClosure()
@@ -63,9 +68,9 @@ open class MRefreshAnimatableView: UIView, MRefreshAnimatableViewConforming {
         pathLayer?.removeFromSuperlayer()
         
         let configuration = LayerConfiguration(path: path,
-                                               lineWidth: 1.0,
+                                               lineWidth: lineWidth,
                                                fillColor: UIColor.clear.cgColor,
-                                               strokeColor: UIColor.black.cgColor)
+                                               strokeColor: strokeColor.cgColor)
         let newPathLayer = sublayersFactory.layer(from: configuration)
         layer.addSublayer(newPathLayer)
         

@@ -22,6 +22,7 @@
 		7E1199B2D72C97163C8120DB593AD152 /* MRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12984480EA6C33C4BFB11667D3487F29 /* MRefreshView.swift */; };
 		8D3E5C8EB21033B7B630C90015789E45 /* MRefreshAnimatableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAE873DD970ACEB6040F96389BD471C /* MRefreshAnimatableView.swift */; };
 		8FC5E69E47ED6DE33464956F01A15C9A /* SVGPathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05902A2C57DA530626845F3CFDA75743 /* SVGPathManager.swift */; };
+		9E6FD2371E3DEF15005CA58C /* PathConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6FD2361E3DEF15005CA58C /* PathConfiguration.swift */; };
 		A3AB5E6639822934CC01F35CDFD86398 /* MRefreshAnimationsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749D1F61791C600B577FA6E5E6C3FDAA /* MRefreshAnimationsFactory.swift */; };
 		B0518FC0B106D0845901F9162789BA00 /* SVGNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73585B6396039A02138731EFE6141740 /* SVGNode.swift */; };
 		B0C9BCA46C5A0848814D969DB849B4AC /* SVGConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBFB6700EC19BCCD8D674AF706ACA7A /* SVGConverter.swift */; };
@@ -83,6 +84,7 @@
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		990EF19BDAF76CBF37DC8675282B5FA9 /* Pods-MRefresh_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-MRefresh_Tests.modulemap"; sourceTree = "<group>"; };
 		99DB5FA661A01E80246BA535615D6B5B /* MRefresh-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MRefresh-dummy.m"; sourceTree = "<group>"; };
+		9E6FD2361E3DEF15005CA58C /* PathConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathConfiguration.swift; sourceTree = "<group>"; };
 		A572FD79C389FCA2AEA6A85AE3AD8E60 /* Pods-MRefresh_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MRefresh_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B3467D86C199A5612DCCE3438104E5B9 /* MRefreshProtocols.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MRefreshProtocols.swift; sourceTree = "<group>"; };
 		BBAE873DD970ACEB6040F96389BD471C /* MRefreshAnimatableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MRefreshAnimatableView.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				12984480EA6C33C4BFB11667D3487F29 /* MRefreshView.swift */,
 				C07C7992A9F4F5B5F52273705902C585 /* MRefreshViewConfiguration.swift */,
 				72DBB50FAFE6BC0A1F0A27A0EA144CA7 /* UIScrollViewExtension.swift */,
+				9E6FD2361E3DEF15005CA58C /* PathConfiguration.swift */,
 			);
 			path = MRefresh;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				72928CE126381EECC91BC286D402AFFF /* MRefresh-dummy.m in Sources */,
 				8D3E5C8EB21033B7B630C90015789E45 /* MRefreshAnimatableView.swift in Sources */,
 				A3AB5E6639822934CC01F35CDFD86398 /* MRefreshAnimationsFactory.swift in Sources */,
+				9E6FD2371E3DEF15005CA58C /* PathConfiguration.swift in Sources */,
 				D7D93E2086E932E11DCD34C8A5A8A330 /* MRefreshProtocols.swift in Sources */,
 				1088E4785FDBF46CB465E6B2CCE244C7 /* MRefreshSublayersFactory.swift in Sources */,
 				7E1199B2D72C97163C8120DB593AD152 /* MRefreshView.swift in Sources */,
