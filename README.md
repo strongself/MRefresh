@@ -14,7 +14,7 @@ So basically MRefresh is a pull-to-refresh with a clear separation of concerns w
 
 To sum up, you can:
 - take *most* SVG paths (though as of today arc command have not been implemented) and draw them in any combination when user pulls the scrollview,
-- provide your custom animations when e.g. the files are loading and when the loading is completed (see below)
+- provide your own custom animations to the pull-to-refresh view
 
 So here's a quick demo of what this library can do (we are drawing one of the FontAwesome SVG paths):
 
@@ -22,7 +22,7 @@ So here's a quick demo of what this library can do (we are drawing one of the Fo
 
 ### Example
 
-To start with, if you don't want to read the long description, you can download the example and see everything for yourself.
+Below see the steps needed to configure the pull-to-refresh view. Of course, if you don't want to read the long description, you can download the example and see everything for yourself.
 
 #### SVGPathManager
 
@@ -36,14 +36,12 @@ let path = "M1247 161q-5 154 -56 297.5t-139.5 260t-205 205t-260 139.5t-297.5 56q
 Secondly, you need to create a path configuration:
 
 ```swift
-let firstConfiguration = SVGPathConfiguration(path: svg, // path string
-                                              timesSmooth: 3, // in this case amount of points to be drawn equals to initialSvgPoints * 2 ^ 3
-                                              drawableFrame: frame) // frame to which the svg should be resized,
-                                              // as a rule you should use the size of the animatable view with zero origin,
-                                              // though in some cases you may want your path to be drawn with an offset
+let configuration = SVGPathConfiguration(path: svg, // path string
+                                         timesSmooth: 3, // amount of points = initialSvgPoints * 2 ^ 3
+                                         drawableFrame: frame) // frame to which the svg should be resized
 ```
 
-Thirdly, you should provide timing for the path to be drawn. Such timing should be a double from 0.0 to 1.0, where 0.0 tells that the animatable view should appear on screen (see *startValue* below). So if you set it to for example 0.95 the path will start to appear when the content offset reaches somewhat near the endValue (see *Second stage* below), i.e. the path will be drawn very fast.
+Thirdly, you should provide timing for the path to be drawn. Such timing should be a value from 0.0 to 1.0, where 0.0 tells that the animatable view should appear on screen. So if you set it to for example 0.95 the path will start to appear when the content offset reaches somewhat near the endValue (i.e. near the stage when the actionHandler is called), so the path will be drawn very fast.
 
 ```swift
 let configurationTime: ConfigurationTime = (time: 0.0,
@@ -55,7 +53,7 @@ To avoid any doubts, you can use many svg's and configurations to configure comp
 let configurationTimes = [firstConfigurationTime, secondConfigurationTime]
 ```
 
-Then it is time to create the... *SVGPathManager* which will do all the hard work converting and resizing your SVG's.
+Then it is time to create the *SVGPathManager* which will do all the hard work converting and resizing your SVG's.
 
 ```swift
 let pathManager = try! SVGPathManager(configurationTimes: [secondConfigurationTime, firstConfigurationTime],
@@ -136,10 +134,6 @@ In case of *MRefreshAnimatableView* it calls a *processingAnimationClosure(CALay
 #### Fourth stage
 
 The scrollview receives *stopAnimating* message (you should send the message when e.g. the data/error is received). After that if user is not holding the view with his finger, the view will receive *stopAnimation* message. Again if we're talking about the *MRefreshAnimatableView* it calls the *endAnimationClosure(CALayer, completion: () -> ())*. So you should either use a default implementation or you can provide your own animation on the layer and call completion when it is finished. Please bear in mind the respective timing, because after user releases its finger the scrollview changes its insets to initial value.  
-
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Installation
 
