@@ -1,6 +1,6 @@
 # MRefresh
 
-[![CI Status](http://img.shields.io/travis/Mikhail Rakhmanov/MRefresh.svg?style=flat)](https://travis-ci.org/Mikhail Rakhmanov/MRefresh)
+[![CI Status](https://img.shields.io/travis/Mikhail%20Rakhmanov/MRefresh.svg?style=flat)](https://travis-ci.org/Mikhail%20Rakhmanov/MRefresh)
 [![Version](https://img.shields.io/cocoapods/v/MRefresh.svg?style=flat)](http://cocoapods.org/pods/MRefresh)
 [![License](https://img.shields.io/cocoapods/l/MRefresh.svg?style=flat)](http://cocoapods.org/pods/MRefresh)
 [![Platform](https://img.shields.io/cocoapods/p/MRefresh.svg?style=flat)](http://cocoapods.org/pods/MRefresh)
