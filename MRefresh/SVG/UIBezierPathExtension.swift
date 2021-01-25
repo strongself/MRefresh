@@ -5,8 +5,8 @@ public enum ConvertErrors: Error {
     case noStartingPoint
 }
 
-extension UIBezierPath {
-    convenience init(path: SVGConnectedPath, proportion: CGFloat? = nil) throws {
+public extension UIBezierPath {
+    public convenience init(path: SVGConnectedPath, proportion: CGFloat? = nil) throws {
         self.init()
         let currentProportion = proportion ?? 1.0
         let currentPaths = path.proportionPaths.filter { $0.startProportion < currentProportion }
@@ -14,7 +14,8 @@ extension UIBezierPath {
         guard !currentPaths.isEmpty else {
             return
         }
-        
+        // the worst case about all these things is that when proportion changes we recalculate everything again
+        // one of the ideas how we can improve performance in the future is by adding caching of the UIBezierPath for different proportions
         try currentPaths.map { proportionPath in
             let proportion = calculateRelativeProportion(currentProportion: currentProportion, startProportion: proportionPath.startProportion)
             return try UIBezierPath(path: proportionPath.path, proportion: proportion)

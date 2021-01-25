@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class SVGSmoother {
+final class SVGSmoother {
     
     func smooth(times: Int, nodes: [SVGNode]) -> [SVGNode] {
         guard !nodes.isEmpty && times >= 1 else {

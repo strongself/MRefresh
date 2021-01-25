@@ -20,7 +20,7 @@ struct AnimatableContainerViewConfiguration {
 
 /// A container view which handles all the logic with respect to positioning the animatable view
 /// It manages its own frame inside the scroll view and also the frame of the animatable subview
-class AnimatableContainerView: UIView {
+final class AnimatableContainerView: UIView {
 
     fileprivate struct Constants {
         static let startingThreshold: CGFloat = 20.0

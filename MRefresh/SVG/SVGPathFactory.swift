@@ -5,7 +5,7 @@ public struct SVGPath {
     public let nodes: [SVGNode]
 }
 
-class SVGPathFactory {
+final class SVGPathFactory {
     private let reader: SVGReader
     private let simplifier: SVGSimplifier
     private let smoother: SVGSmoother

@@ -9,7 +9,6 @@ import UIKit
 /// represents the amount that the user needs to scroll up to
 /// start the animation
 public struct PullToRefreshConfiguration {
-    
     public static let `default` = PullToRefreshConfiguration(
         pullToRefreshViewCenterYOffset: 0,
         loadingContentInset: 100,
@@ -30,5 +29,17 @@ public struct PullToRefreshConfiguration {
     let animationStart: CGFloat
     /// the duration of the content inset change
     let contentInsetChangeAnimationDuration: Double
+    
+    public init(pullToRefreshViewCenterYOffset: CGFloat,
+                loadingContentInset: CGFloat,
+                animationDistance: CGFloat,
+                animationStart: CGFloat,
+                contentInsetChangeAnimationDuration: Double) {
+        self.pullToRefreshViewCenterYOffset = pullToRefreshViewCenterYOffset
+        self.loadingContentInset = loadingContentInset
+        self.animationDistance = animationDistance
+        self.animationStart = animationStart
+        self.contentInsetChangeAnimationDuration = contentInsetChangeAnimationDuration
+    }
 }
 

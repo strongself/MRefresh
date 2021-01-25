@@ -8,15 +8,25 @@ enum SpinnerConstants {
     }
 }
 
-struct LayerConfiguration {
+public struct LayerConfiguration {
     let path: UIBezierPath
     let lineWidth: CGFloat
     let fillColor: CGColor
     let strokeColor: CGColor
+    
+    public init(path: UIBezierPath, lineWidth: CGFloat, fillColor: CGColor, strokeColor: CGColor) {
+        self.path = path
+        self.lineWidth = lineWidth
+        self.fillColor = fillColor
+        self.strokeColor = strokeColor
+    }
 }
 
-public class LayersFactory {
-    func circleLayer(radius: CGFloat, proportion: CGFloat, borderColor: UIColor, backgroundColor: UIColor) -> CAShapeLayer {
+public final class LayerFactory {
+
+    public init() {}
+
+    public func circleLayer(radius: CGFloat, proportion: CGFloat, borderColor: UIColor, backgroundColor: UIColor) -> CAShapeLayer {
         let constants = SpinnerConstants.Circle.self
         let layer = CAShapeLayer()
         let startAngle = constants.arcStartAngle
@@ -35,7 +45,7 @@ public class LayersFactory {
         return layer
     }
     
-    func layer(from configuration: LayerConfiguration) -> CAShapeLayer {
+    public func layer(from configuration: LayerConfiguration) -> CAShapeLayer {
         let layer = CAShapeLayer()
         layer.path = configuration.path.cgPath
         layer.lineWidth = configuration.lineWidth

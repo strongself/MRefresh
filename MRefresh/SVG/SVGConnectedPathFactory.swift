@@ -1,14 +1,14 @@
 import UIKit
 
-struct SVGConnectedPathConfiguration {
-    var elements: [(svg: String, startProportion: CGFloat, depth: Int)] = []
-    let size: CGSize
+public struct SVGConnectedPathConfiguration {
+    public var elements: [(svg: String, startProportion: CGFloat, depth: Int)] = []
+    public let size: CGSize
     
-    init(size: CGSize) {
+    public init(size: CGSize) {
         self.size = size
     }
     
-    mutating func add(svg: String, startProportion: CGFloat, depth: Int) {
+    public mutating func add(svg: String, startProportion: CGFloat, depth: Int) {
         elements.append((svg, startProportion, depth))
     }
 }
@@ -17,9 +17,11 @@ public struct SVGConnectedPath {
     public let proportionPaths: [(startProportion: CGFloat, path: SVGPath)]
 }
 
-final class SVGConnectedPathFactory {
+public final class SVGConnectedPathFactory {
     private let factory: SVGPathFactory
     private let resizer: SVGResizer
+
+    public static let `default` = SVGConnectedPathFactory()
     
     init(factory: SVGPathFactory = .init(),
          resizer: SVGResizer = .init()) {
@@ -27,7 +29,7 @@ final class SVGConnectedPathFactory {
         self.resizer = resizer
     }
     
-    func make(pathConfiguration: SVGConnectedPathConfiguration) throws -> SVGConnectedPath {
+    public func make(pathConfiguration: SVGConnectedPathConfiguration) throws -> SVGConnectedPath {
         var proportionPaths = try pathConfiguration.elements.map {
             (startProportion: $0.startProportion,
              path: try factory.make(svg: $0.svg, smoothDepth: $0.depth))

@@ -5,10 +5,10 @@ public typealias MakeLayerWithProportionClosure = (CGSize, CGFloat) -> CALayer
 public typealias ProcessingAnimationClosure = (CALayer) -> ()
 public typealias EndAnimationClosure = (CALayer, @escaping () -> ()) -> ()
 
-open class DefaultAnimatableView: UIView {
+public final class DefaultAnimatableView: UIView {
 
     fileprivate let animationsFactory = AnimationsFactory()
-    fileprivate let sublayersFactory = LayersFactory()
+    fileprivate let sublayersFactory = LayerFactory()
     
     fileprivate var pathLayer: CALayer?
 
@@ -16,7 +16,7 @@ open class DefaultAnimatableView: UIView {
     public var processingAnimation: ProcessingAnimationClosure = defaultProcessingAnimationClosure()
     public var endAnimation: EndAnimationClosure = defaultEndAnimationClosure()
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.clear
     }
@@ -32,7 +32,7 @@ open class DefaultAnimatableView: UIView {
 }
 
 extension DefaultAnimatableView: AnimatableViewConforming {
-    open func drawPullToRefresh(proportion: CGFloat) {
+    public func drawPullToRefresh(proportion: CGFloat) {
         pathLayer?.removeFromSuperlayer()
         let newPathLayer = makePullToRefreshLayer(bounds.size, proportion)
         layer.addSublayer(newPathLayer)
@@ -40,18 +40,18 @@ extension DefaultAnimatableView: AnimatableViewConforming {
         pathLayer = newPathLayer
     }
     
-    open func stopAnimation() {
+    public func stopAnimation() {
         endAnimation(layer, removeAllAnimations)
     }
     
-    open func startAnimation() {
+    public func startAnimation() {
         layer.removeAllAnimations()
         processingAnimation(layer)
     }
 }
 
 private func makeLayerWithProportionClosure() -> MakeLayerWithProportionClosure {
-    let factory = LayersFactory()
+    let factory = LayerFactory()
     return { size, proportion in
         factory.circleLayer(
             radius: size.width / 2.0,

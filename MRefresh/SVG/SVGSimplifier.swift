@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class SVGSimplifier {
+final class SVGSimplifier {
     
     func simplify(_ nodes: [SVGNode]) -> [SVGNode] {
         guard nodes.count > 1 else {

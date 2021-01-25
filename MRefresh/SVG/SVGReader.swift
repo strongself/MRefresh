@@ -7,7 +7,7 @@ enum SVGReaderError: Error {
 }
 
 /// This class provides for reading svg string and converting it to nodes
-class SVGReader {
+final class SVGReader {
     
     /// Convert string into nodes
     func read(_ svg: String) throws -> [SVGNode] {

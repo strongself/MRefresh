@@ -15,11 +15,13 @@ fileprivate struct Constants {
     }
 }
 
-public class AnimationsFactory {
+public final class AnimationsFactory {
     
     private let constants = Constants.self
+
+    public init() {}
     
-    func rotationAnimation() -> CABasicAnimation {
+    public func rotationAnimation() -> CABasicAnimation {
         let rotationAnimation = CABasicAnimation(keyPath: constants.KeyPaths.rotationAnimation)
         
         rotationAnimation.toValue = 2.0 * CGFloat.pi
@@ -30,7 +32,7 @@ public class AnimationsFactory {
         return rotationAnimation
     }
     
-    func shrinkAnimation() -> CABasicAnimation {
+    public func shrinkAnimation() -> CABasicAnimation {
         let shrinkAnimation = CABasicAnimation(keyPath: constants.KeyPaths.scaleAnimation)
         
         shrinkAnimation.toValue = 0
@@ -41,7 +43,7 @@ public class AnimationsFactory {
         return shrinkAnimation
     }
     
-    func fadeAnimation() -> CABasicAnimation {
+    public func fadeAnimation() -> CABasicAnimation {
         let fadeAnimation = CABasicAnimation(keyPath: constants.KeyPaths.opacityAnimation)
         
         fadeAnimation.toValue = 0
@@ -52,7 +54,7 @@ public class AnimationsFactory {
         return fadeAnimation
     }
     
-    func blinkAnimation() -> CABasicAnimation {
+    public func blinkAnimation() -> CABasicAnimation {
         let blinkAnimation = CABasicAnimation(keyPath: constants.KeyPaths.opacityAnimation)
         
         blinkAnimation.toValue = 0.3

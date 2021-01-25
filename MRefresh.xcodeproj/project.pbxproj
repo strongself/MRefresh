@@ -21,7 +21,7 @@
 		96CA791F25BF74B800218A16 /* DefaultAnimatableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA790A25BF74B800218A16 /* DefaultAnimatableView.swift */; };
 		96CA792025BF74B800218A16 /* AnimatableContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA790B25BF74B800218A16 /* AnimatableContainerView.swift */; };
 		96CA792125BF74B800218A16 /* PullToRefreshViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA790C25BF74B800218A16 /* PullToRefreshViewConfiguration.swift */; };
-		96CA792225BF74B800218A16 /* LayersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA790D25BF74B800218A16 /* LayersFactory.swift */; };
+		96CA792225BF74B800218A16 /* LayerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA790D25BF74B800218A16 /* LayerFactory.swift */; };
 		96CA792325BF74B800218A16 /* UIScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA790E25BF74B800218A16 /* UIScrollViewExtension.swift */; };
 		96CA792425BF74B800218A16 /* SVGPathFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA791025BF74B800218A16 /* SVGPathFactory.swift */; };
 		96CA792525BF74B800218A16 /* SVGNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA791125BF74B800218A16 /* SVGNode.swift */; };
@@ -34,6 +34,7 @@
 		96CA792C25BF74B800218A16 /* SVGSmoother.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA791825BF74B800218A16 /* SVGSmoother.swift */; };
 		96CA792D25BF74B800218A16 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA791A25BF74B800218A16 /* Stack.swift */; };
 		96CA792E25BF74B800218A16 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA791C25BF74B800218A16 /* CGPoint.swift */; };
+		96CA793925BF7B8600218A16 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA793825BF7B8600218A16 /* Constraints.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +67,7 @@
 		96CA790A25BF74B800218A16 /* DefaultAnimatableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAnimatableView.swift; sourceTree = "<group>"; };
 		96CA790B25BF74B800218A16 /* AnimatableContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableContainerView.swift; sourceTree = "<group>"; };
 		96CA790C25BF74B800218A16 /* PullToRefreshViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshViewConfiguration.swift; sourceTree = "<group>"; };
-		96CA790D25BF74B800218A16 /* LayersFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayersFactory.swift; sourceTree = "<group>"; };
+		96CA790D25BF74B800218A16 /* LayerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerFactory.swift; sourceTree = "<group>"; };
 		96CA790E25BF74B800218A16 /* UIScrollViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtension.swift; sourceTree = "<group>"; };
 		96CA791025BF74B800218A16 /* SVGPathFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGPathFactory.swift; sourceTree = "<group>"; };
 		96CA791125BF74B800218A16 /* SVGNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGNode.swift; sourceTree = "<group>"; };
@@ -79,6 +80,7 @@
 		96CA791825BF74B800218A16 /* SVGSmoother.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGSmoother.swift; sourceTree = "<group>"; };
 		96CA791A25BF74B800218A16 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		96CA791C25BF74B800218A16 /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		96CA793825BF7B8600218A16 /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 				96CA78D425BF73CC00218A16 /* Assets.xcassets */,
 				96CA78D625BF73CC00218A16 /* LaunchScreen.storyboard */,
 				96CA78D925BF73CC00218A16 /* Info.plist */,
+				96CA793825BF7B8600218A16 /* Constraints.swift */,
 			);
 			path = MRefreshExamples;
 			sourceTree = "<group>";
@@ -171,7 +174,7 @@
 				96CA790A25BF74B800218A16 /* DefaultAnimatableView.swift */,
 				96CA790B25BF74B800218A16 /* AnimatableContainerView.swift */,
 				96CA790C25BF74B800218A16 /* PullToRefreshViewConfiguration.swift */,
-				96CA790D25BF74B800218A16 /* LayersFactory.swift */,
+				96CA790D25BF74B800218A16 /* LayerFactory.swift */,
 				96CA790E25BF74B800218A16 /* UIScrollViewExtension.swift */,
 			);
 			path = MRefresh;
@@ -348,7 +351,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96CA792225BF74B800218A16 /* LayersFactory.swift in Sources */,
+				96CA792225BF74B800218A16 /* LayerFactory.swift in Sources */,
 				96CA792025BF74B800218A16 /* AnimatableContainerView.swift in Sources */,
 				96CA792725BF74B800218A16 /* SVGReader.swift in Sources */,
 				96CA792D25BF74B800218A16 /* Stack.swift in Sources */,
@@ -381,6 +384,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96CA793925BF7B8600218A16 /* Constraints.swift in Sources */,
 				96CA78D025BF73CB00218A16 /* ViewController.swift in Sources */,
 				96CA78CC25BF73CB00218A16 /* AppDelegate.swift in Sources */,
 				96CA78CE25BF73CB00218A16 /* SceneDelegate.swift in Sources */,

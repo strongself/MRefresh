@@ -7,7 +7,7 @@ struct ResizingParameters {
 }
 
 /// Class that converts the original svg points into points inside the specific size
-class SVGResizer {
+final class SVGResizer {
     /// resizing svg to fit the new frame
     func getResizingParameters(_ nodes: [SVGNode], for newSize: CGSize) -> ResizingParameters {
         let minCoordinate = calculateLimitPoint(
