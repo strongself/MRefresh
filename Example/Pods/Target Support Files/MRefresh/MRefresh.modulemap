@@ -1,6 +1,0 @@
-framework module MRefresh {
-  umbrella header "MRefresh-umbrella.h"
-
-  export *
-  module * { export * }
-}
