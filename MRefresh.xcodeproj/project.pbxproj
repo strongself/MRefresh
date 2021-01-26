@@ -134,7 +134,7 @@
 			children = (
 				96CA791B25BF74B800218A16 /* Extensions */,
 				96CA791925BF74B800218A16 /* Helpers */,
-				96CA790725BF74B800218A16 /* MRefresh */,
+				96CA790725BF74B800218A16 /* PullToRefresh */,
 				96CA790F25BF74B800218A16 /* SVG */,
 				96CA78AA25BF72F200218A16 /* MRefresh.h */,
 				96CA78AB25BF72F200218A16 /* Info.plist */,
@@ -166,7 +166,7 @@
 			path = MRefreshExamples;
 			sourceTree = "<group>";
 		};
-		96CA790725BF74B800218A16 /* MRefresh */ = {
+		96CA790725BF74B800218A16 /* PullToRefresh */ = {
 			isa = PBXGroup;
 			children = (
 				96CA790825BF74B800218A16 /* AnimatableView.swift */,
@@ -177,7 +177,7 @@
 				96CA790D25BF74B800218A16 /* LayerFactory.swift */,
 				96CA790E25BF74B800218A16 /* UIScrollViewExtension.swift */,
 			);
-			path = MRefresh;
+			path = PullToRefresh;
 			sourceTree = "<group>";
 		};
 		96CA790F25BF74B800218A16 /* SVG */ = {

@@ -6,7 +6,7 @@ public enum ConvertErrors: Error {
 }
 
 public extension UIBezierPath {
-    public convenience init(path: SVGConnectedPath, proportion: CGFloat? = nil) throws {
+    convenience init(path: SVGConnectedPath, proportion: CGFloat? = nil) throws {
         self.init()
         let currentProportion = proportion ?? 1.0
         let currentPaths = path.proportionPaths.filter { $0.startProportion < currentProportion }
