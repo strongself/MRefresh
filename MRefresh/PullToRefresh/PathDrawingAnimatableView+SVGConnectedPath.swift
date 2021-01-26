@@ -1,6 +1,6 @@
 import UIKit
 
-public extension DefaultAnimatableView {
+public extension PathDrawingAnimatableView {
     convenience init(path: SVGConnectedPath, frame: CGRect) {
         self.init(frame: frame)
         makePullToRefreshLayer = makePathLayerClosure(path: path)

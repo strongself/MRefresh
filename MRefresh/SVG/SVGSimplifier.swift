@@ -1,8 +1,8 @@
 import Foundation
 import UIKit
 
+/// Removes relative and shorthand nodes from the path
 final class SVGSimplifier {
-    
     func simplify(_ nodes: [SVGNode]) -> [SVGNode] {
         guard nodes.count > 1 else {
             return nodes

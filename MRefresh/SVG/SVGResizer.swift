@@ -6,7 +6,7 @@ struct ResizingParameters {
     let offset: CGPoint
 }
 
-/// Class that converts the original svg points into points inside the specific size
+/// Class that converts the original svg points into points inside specific rectangle
 final class SVGResizer {
     /// resizing svg to fit the new frame
     func getResizingParameters(_ nodes: [SVGNode], for newSize: CGSize) -> ResizingParameters {

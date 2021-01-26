@@ -5,6 +5,7 @@ public struct SVGPath {
     public let nodes: [SVGNode]
 }
 
+/// Converts one path to nodes without resizing it
 final class SVGPathFactory {
     private let reader: SVGReader
     private let simplifier: SVGSimplifier

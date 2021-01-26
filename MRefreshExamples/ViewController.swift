@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         let connectedPath = makeConnectedPath(size: CGSize(width: 50.0, height: 50.0))
         let frame = CGRect(origin: CGPoint.zero,
                            size: CGSize(width: 50.0, height: 50.0))
-        let animatableView = DefaultAnimatableView(path: connectedPath, frame: frame)
+        let animatableView = PathDrawingAnimatableView(path: connectedPath, frame: frame)
         tableView.addPullToRefresh(animatable: animatableView, handler: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.tableView.stopAnimating()

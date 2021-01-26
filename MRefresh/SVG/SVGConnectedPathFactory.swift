@@ -17,6 +17,7 @@ public struct SVGConnectedPath {
     public let proportionPaths: [(startProportion: CGFloat, path: SVGPath)]
 }
 
+/// Creates one or more connected path from the svgs
 public final class SVGConnectedPathFactory {
     private let factory: SVGPathFactory
     private let resizer: SVGResizer

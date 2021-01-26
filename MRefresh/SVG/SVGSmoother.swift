@@ -1,8 +1,8 @@
 import Foundation
 import UIKit
 
+/// Adds more intermediate points to bezier curves for smooth drawing
 final class SVGSmoother {
-    
     func smooth(times: Int, nodes: [SVGNode]) -> [SVGNode] {
         guard !nodes.isEmpty && times >= 1 else {
             return nodes
@@ -52,7 +52,6 @@ final class SVGSmoother {
     }
     
     private func splitCurveHelper(points: [CGPoint], firstControlPoints: inout [CGPoint], secondControlPoints: inout [CGPoint]) {
-        
         guard points.count > 1 else { return }
         
         var newPoints: [CGPoint] = []

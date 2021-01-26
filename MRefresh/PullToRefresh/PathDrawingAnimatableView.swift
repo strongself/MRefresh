@@ -5,7 +5,7 @@ public typealias MakeLayerWithProportionClosure = (CGSize, CGFloat) -> CALayer
 public typealias ProcessingAnimationClosure = (CALayer) -> ()
 public typealias EndAnimationClosure = (CALayer, @escaping () -> ()) -> ()
 
-public final class DefaultAnimatableView: UIView {
+public final class PathDrawingAnimatableView: UIView {
 
     fileprivate let animationsFactory = AnimationsFactory()
     fileprivate let sublayersFactory = LayerFactory()
@@ -31,7 +31,7 @@ public final class DefaultAnimatableView: UIView {
     }
 }
 
-extension DefaultAnimatableView: AnimatableViewConforming {
+extension PathDrawingAnimatableView: AnimatableViewConforming {
     public func drawPullToRefresh(proportion: CGFloat) {
         pathLayer?.removeFromSuperlayer()
         let newPathLayer = makePullToRefreshLayer(bounds.size, proportion)
