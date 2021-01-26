@@ -33,23 +33,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.reloadData()
-        let animatableView = DefaultAnimatableView(frame: CGRect(origin: CGPoint.zero,
-                                                                 size: CGSize(width: 50.0, height: 50.0)))
         let connectedPath = makeConnectedPath(size: CGSize(width: 50.0, height: 50.0))
-        let factory = LayerFactory()
-        animatableView.makePullToRefreshLayer = { size, proportion in
-            guard let path = try? UIBezierPath(path: connectedPath, proportion: proportion) else {
-                return CAShapeLayer()
-            }
-            let configuration = LayerConfiguration(
-                path: path,
-                lineWidth: 1.0,
-                fillColor: UIColor.clear.cgColor,
-                strokeColor: UIColor.black.cgColor
-            )
-            let layer = factory.layer(from: configuration)
-            return layer
-        }
+        let frame = CGRect(origin: CGPoint.zero,
+                           size: CGSize(width: 50.0, height: 50.0))
+        let animatableView = DefaultAnimatableView(path: connectedPath, frame: frame)
         tableView.addPullToRefresh(animatable: animatableView, handler: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.tableView.stopAnimating()

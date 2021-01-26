@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		961E6D3125BFFD8700D089A1 /* DefaultAnimatableView+SVGConnectedPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961E6D3025BFFD8700D089A1 /* DefaultAnimatableView+SVGConnectedPath.swift */; };
 		96CA78B125BF72F200218A16 /* MRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96CA78A725BF72F200218A16 /* MRefresh.framework */; };
 		96CA78B625BF72F200218A16 /* SVGReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA78B525BF72F200218A16 /* SVGReaderTests.swift */; };
 		96CA78B825BF72F200218A16 /* MRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = 96CA78AA25BF72F200218A16 /* MRefresh.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		961E6D3025BFFD8700D089A1 /* DefaultAnimatableView+SVGConnectedPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DefaultAnimatableView+SVGConnectedPath.swift"; sourceTree = "<group>"; };
 		96CA78A725BF72F200218A16 /* MRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96CA78AA25BF72F200218A16 /* MRefresh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MRefresh.h; sourceTree = "<group>"; };
 		96CA78AB25BF72F200218A16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				96CA790C25BF74B800218A16 /* PullToRefreshViewConfiguration.swift */,
 				96CA790D25BF74B800218A16 /* LayerFactory.swift */,
 				96CA790E25BF74B800218A16 /* UIScrollViewExtension.swift */,
+				961E6D3025BFFD8700D089A1 /* DefaultAnimatableView+SVGConnectedPath.swift */,
 			);
 			path = PullToRefresh;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				96CA792825BF74B800218A16 /* UIBezierPathExtension.swift in Sources */,
 				96CA792925BF74B800218A16 /* SVGInstruction.swift in Sources */,
 				96CA792525BF74B800218A16 /* SVGNode.swift in Sources */,
+				961E6D3125BFFD8700D089A1 /* DefaultAnimatableView+SVGConnectedPath.swift in Sources */,
 				96CA792625BF74B800218A16 /* SVGResizer.swift in Sources */,
 				96CA791D25BF74B800218A16 /* AnimatableView.swift in Sources */,
 				96CA792A25BF74B800218A16 /* SVGConnectedPathFactory.swift in Sources */,
