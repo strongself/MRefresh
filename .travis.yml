@@ -7,4 +7,4 @@ env:
 
 script:
   - set -o pipefail && xcodebuild test -enableCodeCoverage YES -project MRefresh.xcodeproj -scheme MRefresh -sdk $TEST_SDK -destination "platform=iOS Simulator,OS=$OS,name=$NAME" ONLY_ACTIVE_ARCH=YES
-view raw
+
