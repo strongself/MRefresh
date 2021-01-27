@@ -1,8 +1,9 @@
 import Foundation
 import UIKit
 
-enum SVGReaderError: Error {
+public enum SVGReaderError: Error {
     case cannotRead
+    case invalidPoints
     case arcNotSupported
 }
 
@@ -25,11 +26,12 @@ final class SVGReader {
         var nodes: [SVGNode] = []
         
         while scanner.scanCharacters(from: instructionSet, into: &nsStringInstruction) {
+            // TODO: make better errors and simplify the parsing
             guard let stringInstruction = nsStringInstruction as String? else {
                 throw SVGReaderError.cannotRead
             }
             let instructions = stringInstruction.compactMap { SVGInstruction(rawValue: String($0)) }
-            if instructions.isEmpty {
+            if instructions.isEmpty || instructions.count != stringInstruction.count {
                 throw SVGReaderError.cannotRead
             }
             if instructions[0] == .closePath || instructions[0] == .closePathSmall {
@@ -43,19 +45,24 @@ final class SVGReader {
                 throw SVGReaderError.arcNotSupported
             }
             
-            nodes += scanValues(scanner: scanner, instruction: instruction)
+            nodes += try scanValues(scanner: scanner, instruction: instruction)
         }
         
         return nodes
     }
     
-    private func scanValues(scanner: Scanner, instruction: SVGInstruction) -> [SVGNode] {
+    private func scanValues(scanner: Scanner, instruction: SVGInstruction) throws -> [SVGNode] {
         var value: Double = 0.0
         var values: [CGFloat] = []
         
         while scanner.scanDouble(&value) {
             values.append(CGFloat(value))
         }
+
+        if values.count % instruction.valuesCount != 0 {
+            throw SVGReaderError.invalidPoints
+        }
+
         // different commands provide for different points count
         // so we chunk them
         // also some commands can be repeated (e.g. we can have hundreds of values which we need to split)

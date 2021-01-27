@@ -1,6 +1,6 @@
 import Foundation
 
-public enum SVGInstruction: String, CaseIterable {
+public enum SVGInstruction: String, Equatable, CaseIterable {
     case arc = "A"
     case arcRelative = "a"
     case move = "M"
