@@ -1,8 +1,6 @@
 import Foundation
 
 public enum SVGInstruction: String, Equatable, CaseIterable {
-    case arc = "A"
-    case arcRelative = "a"
     case move = "M"
     case moveRelative = "m"
     case line = "L"
@@ -40,8 +38,6 @@ public enum SVGInstruction: String, Equatable, CaseIterable {
             return .quadratic
         case .shorthandQuadraticRelative:
             return .shorthandQuadratic
-        case .arcRelative:
-            return .arc
             
         default:
             return .line
@@ -77,8 +73,6 @@ public enum SVGInstruction: String, Equatable, CaseIterable {
             return true
         case .shorthandQuadraticRelative:
             return true
-        case .arcRelative:
-            return true
             
         default:
             return false
@@ -95,7 +89,7 @@ public enum SVGInstruction: String, Equatable, CaseIterable {
             return 2
         case .vertical, .verticalRelative, .horizontal, .horizontalRelative:
             return 1
-        default:
+        case .closePath, .closePathSmall:
             return 0
         }
     }

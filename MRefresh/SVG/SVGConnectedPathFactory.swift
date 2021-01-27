@@ -24,8 +24,8 @@ public final class SVGConnectedPathFactory {
 
     public static let `default` = SVGConnectedPathFactory()
     
-    init(factory: SVGPathFactory = .init(),
-         resizer: SVGResizer = .init()) {
+    init(factory: SVGPathFactory = SVGPathFactoryImpl(),
+         resizer: SVGResizer = SVGResizerImpl()) {
         self.factory = factory
         self.resizer = resizer
     }

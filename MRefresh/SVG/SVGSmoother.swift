@@ -2,29 +2,33 @@ import Foundation
 import UIKit
 
 /// Adds more intermediate points to bezier curves for smooth drawing
-final class SVGSmoother {
+protocol SVGSmoother {
+    func smooth(times: Int, nodes: [SVGNode]) -> [SVGNode]
+}
+
+final class SVGSmootherImpl: SVGSmoother {
     func smooth(times: Int, nodes: [SVGNode]) -> [SVGNode] {
         guard !nodes.isEmpty && times >= 1 else {
             return nodes
         }
         var newNodes = [nodes[0]]
-        
+
         for index in 1 ... nodes.count - 1 {
             let previousNode = nodes[index - 1]
             let currentNode = nodes[index]
-            
+
             switch currentNode.instruction {
-            case .quadratic, .cubic, .line, .horizontal, .vertical:
-                let currentNodes = splitCurveHalf(firstNode: previousNode, secondNode: currentNode, times: times)
-                newNodes += currentNodes
-            default:
-                newNodes.append(currentNode)
+                case .quadratic, .cubic, .line, .horizontal, .vertical:
+                    let currentNodes = splitCurveHalf(firstNode: previousNode, secondNode: currentNode, times: times)
+                    newNodes += currentNodes
+                default:
+                    newNodes.append(currentNode)
             }
         }
-        
+
         return newNodes
     }
-    
+
     private func splitCurveHalf(firstNode: SVGNode, secondNode: SVGNode, times: Int) -> [SVGNode] {
         // we split only the nodes that have more than one point
         let lastPointOfFirstNode = firstNode.points.last!

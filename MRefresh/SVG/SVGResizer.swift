@@ -6,9 +6,17 @@ struct ResizingParameters {
     let offset: CGPoint
 }
 
-/// Class that converts the original svg points into points inside specific rectangle
-final class SVGResizer {
+/// Converts the original svg points into points inside specific rectangle
+protocol SVGResizer {
     /// resizing svg to fit the new frame
+    func getResizingParameters(_ nodes: [SVGNode], for newSize: CGSize) -> ResizingParameters
+    /// rescaling svg nodes
+    func rescaled(_ nodes: [SVGNode], scale: CGFloat) -> [SVGNode]
+    /// moving svg nodes along the offset
+    func moved(_ nodes: [SVGNode], offset: CGPoint) -> [SVGNode]
+}
+
+final class SVGResizerImpl: SVGResizer {
     func getResizingParameters(_ nodes: [SVGNode], for newSize: CGSize) -> ResizingParameters {
         let minCoordinate = calculateLimitPoint(
             nodes,
@@ -36,13 +44,6 @@ final class SVGResizer {
         )
     }
     
-    private func normalize(_ nodes: [SVGNode], offset: CGPoint) -> [SVGNode] {
-        return nodes.map { node in
-            return SVGNode(instruction: node.instruction,
-                           points: node.points.map { CGPoint(x: $0.x - offset.x, y: $0.y - offset.y) })
-        }
-    }
-    
     func rescaled(_ nodes: [SVGNode], scale: CGFloat) -> [SVGNode] {
         nodes.map { node in
             SVGNode(instruction: node.instruction,
@@ -54,6 +55,13 @@ final class SVGResizer {
         nodes.map { node in
             SVGNode(instruction: node.instruction,
                     points: node.points.map { $0.offset(offset) })
+        }
+    }
+    
+    private func normalize(_ nodes: [SVGNode], offset: CGPoint) -> [SVGNode] {
+        return nodes.map { node in
+            return SVGNode(instruction: node.instruction,
+                           points: node.points.map { CGPoint(x: $0.x - offset.x, y: $0.y - offset.y) })
         }
     }
     
@@ -75,4 +83,3 @@ final class SVGResizer {
         return CGPoint(x: x, y: y)
     }
 }
-

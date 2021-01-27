@@ -6,14 +6,18 @@ public struct SVGPath {
 }
 
 /// Converts one path to nodes without resizing it
-final class SVGPathFactory {
+protocol SVGPathFactory {
+    func make(svg: String, smoothDepth: Int) throws -> SVGPath
+}
+
+final class SVGPathFactoryImpl: SVGPathFactory {
     private let reader: SVGReader
     private let simplifier: SVGSimplifier
     private let smoother: SVGSmoother
     
-    init(reader: SVGReader = .init(),
-         simplifier: SVGSimplifier = .init(),
-         smoother: SVGSmoother = .init()) {
+    init(reader: SVGReader = SVGReaderImpl(),
+         simplifier: SVGSimplifier = SVGSimplifierImpl(),
+         smoother: SVGSmoother = SVGSmootherImpl()) {
         self.reader = reader
         self.simplifier = simplifier
         self.smoother = smoother
@@ -27,3 +31,4 @@ final class SVGPathFactory {
         return SVGPath(nodes: smoothed)
     }
 }
+

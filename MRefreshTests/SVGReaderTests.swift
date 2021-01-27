@@ -5,9 +5,9 @@ func p(_ x: CGFloat, _ y: CGFloat) -> CGPoint {
     return CGPoint(x: x, y: y)
 }
 
-class MRefreshTests: XCTestCase {
+class SVGReaderTests: XCTestCase {
     
-    private let reader = MRefresh.SVGReader()
+    private let reader = MRefresh.SVGReaderImpl()
     
     func testReadNonRelativeSVG() throws {
         // given
@@ -83,5 +83,49 @@ class MRefreshTests: XCTestCase {
 
         // then
         XCTAssertEqual(nodes, expectedNodes)
+    }
+
+    func testSVGWithUnknownSymbols() {
+        // given
+        let svg = "M100 100S100 100 100 100R100 100Z"
+
+        // when
+        var returnedError: Error?
+        do {
+            _ = try reader.read(svg)
+        } catch {
+            returnedError = error
+        }
+
+        // then
+        XCTAssertNotNil(returnedError)
+    }
+
+    func testSVGWithIncorrectPoints() {
+        for instruction in SVGInstruction.allCases {
+            // given
+            let values: String
+            // generating different number of points than expected
+            switch instruction.valuesCount {
+                case 0:
+                    values = "100"
+                case 1:
+                    values = ""
+                default:
+                    values = (0 ... instruction.valuesCount).map { _ in "100" }.joined(separator: " ")
+            }
+            let testedSvg = "M100 100S100 100 100 100\(instruction.rawValue + values)Z"
+
+            // when
+            var returnedError: Error?
+            do {
+                _ = try reader.read(testedSvg)
+            } catch {
+                returnedError = error
+            }
+
+            // then
+            XCTAssertNotNil(returnedError)
+        }
     }
 }

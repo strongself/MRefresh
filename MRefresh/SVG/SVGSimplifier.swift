@@ -1,30 +1,35 @@
 import Foundation
 import UIKit
 
-/// Removes relative and shorthand nodes from the path
-final class SVGSimplifier {
+/// Removes relative and shorthand nodes from the path and converts them to representation needed
+/// for other components
+protocol SVGSimplifier {
+    func simplify(_ nodes: [SVGNode]) -> [SVGNode]
+}
+
+final class SVGSimplifierImpl: SVGSimplifier {
     func simplify(_ nodes: [SVGNode]) -> [SVGNode] {
         guard nodes.count > 1 else {
             return nodes
         }
-        
+
         var subpathPointsStack = Stack<SVGNode>()
         var convertedNodes: [SVGNode] = []
         let firstNode = nodes[0]
-        
+
         convertedNodes.append(firstNode)
         if firstNode.instruction == .moveRelative || firstNode.instruction == .move {
             subpathPointsStack.push(firstNode)
         }
-        
+
         // this could have been rewritten with zip but I am too lazy :-(
         for index in 1 ..< nodes.count {
             convertNode(nodes: nodes, convertedNodes: &convertedNodes, pointsStack: &subpathPointsStack, index: index)
         }
-        
+
         return convertedNodes
     }
-    
+
     private func convertNode(
         nodes: [SVGNode],
         convertedNodes: inout [SVGNode],

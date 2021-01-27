@@ -36,6 +36,10 @@
 		96CA792D25BF74B800218A16 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA791A25BF74B800218A16 /* Stack.swift */; };
 		96CA792E25BF74B800218A16 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA791C25BF74B800218A16 /* CGPoint.swift */; };
 		96CA793925BF7B8600218A16 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA793825BF7B8600218A16 /* Constraints.swift */; };
+		96EEB34B25C14D1F004CBFD0 /* SVGReaderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EEB34A25C14D1F004CBFD0 /* SVGReaderMock.swift */; };
+		96EEB35325C14DA2004CBFD0 /* SVGSimplifierMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EEB35225C14DA2004CBFD0 /* SVGSimplifierMock.swift */; };
+		96EEB35825C14E25004CBFD0 /* SVGSmootherMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EEB35725C14E25004CBFD0 /* SVGSmootherMock.swift */; };
+		96EEB35D25C154D4004CBFD0 /* SVGPathFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EEB35C25C154D4004CBFD0 /* SVGPathFactoryTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +87,10 @@
 		96CA791A25BF74B800218A16 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		96CA791C25BF74B800218A16 /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		96CA793825BF7B8600218A16 /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
+		96EEB34A25C14D1F004CBFD0 /* SVGReaderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGReaderMock.swift; sourceTree = "<group>"; };
+		96EEB35225C14DA2004CBFD0 /* SVGSimplifierMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGSimplifierMock.swift; sourceTree = "<group>"; };
+		96EEB35725C14E25004CBFD0 /* SVGSmootherMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGSmootherMock.swift; sourceTree = "<group>"; };
+		96EEB35C25C154D4004CBFD0 /* SVGPathFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGPathFactoryTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +157,10 @@
 			children = (
 				96CA78B525BF72F200218A16 /* SVGReaderTests.swift */,
 				96CA78B725BF72F200218A16 /* Info.plist */,
+				96EEB34A25C14D1F004CBFD0 /* SVGReaderMock.swift */,
+				96EEB35225C14DA2004CBFD0 /* SVGSimplifierMock.swift */,
+				96EEB35725C14E25004CBFD0 /* SVGSmootherMock.swift */,
+				96EEB35C25C154D4004CBFD0 /* SVGPathFactoryTests.swift */,
 			);
 			path = MRefreshTests;
 			sourceTree = "<group>";
@@ -380,7 +392,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96EEB35D25C154D4004CBFD0 /* SVGPathFactoryTests.swift in Sources */,
 				96CA78B625BF72F200218A16 /* SVGReaderTests.swift in Sources */,
+				96EEB34B25C14D1F004CBFD0 /* SVGReaderMock.swift in Sources */,
+				96EEB35325C14DA2004CBFD0 /* SVGSimplifierMock.swift in Sources */,
+				96EEB35825C14E25004CBFD0 /* SVGSmootherMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

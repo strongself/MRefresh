@@ -4,53 +4,69 @@ import UIKit
 public enum SVGReaderError: Error {
     case cannotRead
     case invalidPoints
-    case arcNotSupported
 }
 
-/// This class provides for reading svg string and converting it to nodes
-final class SVGReader {
-    
-    /// Convert string into nodes
+/// Reads SVG strings and converts them to nodes
+protocol SVGReader {
+    /// Converts the string to nodes
+    func read(_ svg: String) throws -> [SVGNode]
+}
+
+final class SVGReaderImpl: SVGReader {
     func read(_ svg: String) throws -> [SVGNode] {
         let scanner = Scanner(string: svg)
-        
+
         var skippedCharacters = CharacterSet(charactersIn: ",")
         skippedCharacters.formUnion(CharacterSet.whitespacesAndNewlines)
-        
+
         scanner.charactersToBeSkipped = skippedCharacters
-        
-        let allInstructions = SVGInstruction.allCases.map { $0.rawValue }.reduce("", +)
-        let instructionSet = CharacterSet(charactersIn: allInstructions)
-        
         var nsStringInstruction: NSString?
         var nodes: [SVGNode] = []
-        
-        while scanner.scanCharacters(from: instructionSet, into: &nsStringInstruction) {
+        // this looks ugly but we can scan by character only after ios 13.0
+        while scanner.scanCharacters(from: CharacterSet.letters, into: &nsStringInstruction) {
             // TODO: make better errors and simplify the parsing
-            guard let stringInstruction = nsStringInstruction as String? else {
+            guard let stringInstructions = nsStringInstruction as String? else {
                 throw SVGReaderError.cannotRead
             }
-            let instructions = stringInstruction.compactMap { SVGInstruction(rawValue: String($0)) }
-            if instructions.isEmpty || instructions.count != stringInstruction.count {
+            let instructions = stringInstructions.compactMap { SVGInstruction(rawValue: String($0)) }
+            // we have unknown symbols
+            if instructions.count != stringInstructions.count {
                 throw SVGReaderError.cannotRead
             }
-            if instructions[0] == .closePath || instructions[0] == .closePathSmall {
-                nodes.append(SVGNode(instruction: instructions[0], points: []))
-                if instructions.count == 1 {
-                    break
-                }
+            switch instructions.count {
+                case 0:
+                    throw SVGReaderError.cannotRead
+                case 1:
+                    let instruction = instructions.first!
+                    if instruction == .closePath || instruction == .closePathSmall {
+                        nodes.append(SVGNode(instruction: instruction, points: []))
+                        continue
+                    }
+                    nodes += try scanValues(scanner: scanner, instruction: instruction)
+                default:
+                    let allFirstIsClosePaths = instructions.dropLast().filter {
+                        $0 != .closePath && $0 != .closePathSmall
+                    }.count == 0
+                    if !allFirstIsClosePaths {
+                        throw SVGReaderError.cannotRead
+                    }
+                    instructions.dropLast().forEach {
+                        nodes.append(SVGNode(instruction: $0, points: []))
+                    }
+                    let lastInstruction = instructions.last!
+                    if lastInstruction == .closePath || lastInstruction == .closePathSmall {
+                        nodes.append(SVGNode(instruction: lastInstruction, points: []))
+                        continue
+                    }
+                    nodes += try scanValues(scanner: scanner, instruction: lastInstruction)
             }
-            let instruction = instructions.last!
-            if instruction == .arc || instruction == .arcRelative {
-                throw SVGReaderError.arcNotSupported
-            }
-            
-            nodes += try scanValues(scanner: scanner, instruction: instruction)
         }
-        
+        if !scanner.isAtEnd {
+            throw SVGReaderError.cannotRead
+        }
         return nodes
     }
-    
+
     private func scanValues(scanner: Scanner, instruction: SVGInstruction) throws -> [SVGNode] {
         var value: Double = 0.0
         var values: [CGFloat] = []
