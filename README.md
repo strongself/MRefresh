@@ -17,7 +17,7 @@ To sum up, you can:
 
 So here's a quick demo of what this library can do (we are drawing one of the FontAwesome SVG paths):
 
-![Alt Text](https://github.com/mcrakhman/FilesRepository/blob/master/pull-to-refresh.gif)
+![MRefresh demo](Assets/MRefresh.gif)
 
 ### Example
 
